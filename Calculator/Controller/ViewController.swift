@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     var colorchiat : UIColor?
     var x = caculator()
     var countphay = 0
-    
+    var prebutton = "0"
     override func viewDidLoad() {
         super.viewDidLoad()
         colortru = buttonSb.backgroundColor
@@ -105,80 +105,48 @@ class ViewController: UIViewController {
         let title = sender.currentTitle!
         switch title {
         case "+","-","x",":":
-            buttonC.setTitle("C", for: .normal)
             buttonResetColor()
             buttonchoosed(title)
-            let prebutton = x.getPrebutton()
-            if prebutton != "+" && prebutton != "-" && prebutton != "x" && prebutton != ":"
+            if prebutton>="0" && prebutton<="9"
             {
-                let fl = (resultText.text! as NSString).floatValue
-                x.setResult(fl)
-                showResult()
+                x.addElement(resultText.text!)
+                resultText.text = "\((x.tinh() as NSString).floatValue.clean)"
             }
-            x.setPrebutton(title)
+            prebutton=title
         case "0"..."9":
-            buttonC.setTitle("C", for: .normal)
-            let prebutton = x.getPrebutton()
+            buttonResetColor()
+            if prebutton == "="
+            {
+                x = caculator()
+                resultText.text = title
+                prebutton = title
+                break;
+            }
             if prebutton == "+" || prebutton == "-" || prebutton == "x" || prebutton == ":"
             {
-                x.setDau(prebutton)
                 resultText.text = "0"
+                x.addElement(prebutton)
             }
             deleteZerobegin()
-            x.setPrebutton(title)
             resultText.text = resultText.text! + title
-        case "%":
-            buttonC.setTitle("C", for: .normal)
-            var fl = (resultText.text! as NSString).floatValue
-            fl = fl / 100.0
-            if x.getPrebutton() == "+" || x.getPrebutton() == "-" || x.getPrebutton() == "x" || x.getPrebutton() == ":"
-            {
-                x.setDau(x.getPrebutton())
-            }
-            resultText.text = String("\(fl.clean)")
-            x.setPrebutton(title)
-        case ".":// countphay
-            if !(resultText.text?.hasSuffix("."))!
-            {
-                resultText.text! += "."
-            }
-            x.setPrebutton(title)
-        case "+/-":
-            buttonC.setTitle("C", for: .normal)
-            if (resultText.text?.hasPrefix("-"))!
-            {
-                resultText.text?.remove(at: resultText.text!.startIndex)
-            } else
-            {
-                resultText.text = "-"+resultText.text!
-            }
-            if (x.getPrebutton() == "+")||(x.getPrebutton() == "-") || (x.getPrebutton() == "x") || (x.getPrebutton() == ":")
-            {
-                resultText.text="-0"
-            }
-            x.setPrebutton(title)
-        case "C": //back 1 step depend on prebutton: number -> delete resultTex; dau -> delete resultText, dau="+";
-                    // group c -> delete resultText, dau="+"
-            if (x.getPrebutton() == "+")||(x.getPrebutton() == "-") || (x.getPrebutton() == "x") || (x.getPrebutton() == ":")
-            {
-                buttonResetColor()
-                buttonchoosed(x.getDau())
-            }
-            if x.getPrebutton()>="0" && x.getPrebutton()<="9"
-            {
-                x.setDau("+")
-            }
-            resultText.text="0"
-            buttonC.setTitle("AC", for: .normal)
-        case "AC": //delete resultText, set x as new
-            resultText.text="0"
-            x=caculator()
+            prebutton=title
+        
+        case "AC":
+            x = caculator()
+            resultText.text = "0"
+            prebutton = "0"
+        case "=":
             buttonResetColor()
-        case "=": //setResult
-            buttonC.setTitle("C", for: .normal)
-            let fl = (resultText.text! as NSString).floatValue
-            x.setResult(fl)
-            showResult()
+            if prebutton >= "0" && prebutton <= "9"
+            {
+                x.addElement(resultText.text!)
+            } else if prebutton == "+" || prebutton == "-" || prebutton == "x" || prebutton == ":"
+            {
+                x.addElement(prebutton)
+            }
+             
+            resultText.text = "\((x.tinh() as NSString).floatValue.clean)"
+            prebutton = title
         default: break
         }
     }
@@ -193,16 +161,6 @@ class ViewController: UIViewController {
             buttonRound()
         }
     }
-    func showResult(){
-        resultText.text = String("\(x.getResult().clean)")
-      /*  if (floorf(x.getResult())==x.getResult())
-        {
-            resultText.text = String(format: "%.0f",x.getResult())
-        } else{
-            resultText.text = String(format: "%f",x.getResult())
-        }*/
-    }
-    
     func buttonchoosed(_ str: String) {
         switch str {
         case "+":

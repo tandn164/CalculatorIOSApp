@@ -14,6 +14,8 @@
 		4DBCAC2D2408EEE9000715B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DBCAC2B2408EEE9000715B1 /* LaunchScreen.storyboard */; };
 		4DBCAC3D24092567000715B1 /* calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBCAC3C24092567000715B1 /* calculator.swift */; };
 		4DD92E672409A8B40062FF46 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DD92E662409A8B40062FF46 /* Images.xcassets */; };
+		4DD92EE6240BCC210062FF46 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD92EE5240BCC210062FF46 /* Stack.swift */; };
+		4DD92EE8240BD5DD0062FF46 /* calculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD92EE7240BD5DD0062FF46 /* calculate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		4DBCAC2E2408EEE9000715B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DBCAC3C24092567000715B1 /* calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calculator.swift; sourceTree = "<group>"; };
 		4DD92E662409A8B40062FF46 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4DD92EE5240BCC210062FF46 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		4DD92EE7240BD5DD0062FF46 /* calculate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calculate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				4DBCAC3C24092567000715B1 /* calculator.swift */,
+				4DD92EE5240BCC210062FF46 /* Stack.swift */,
+				4DD92EE7240BD5DD0062FF46 /* calculate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -166,7 +172,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DD92EE8240BD5DD0062FF46 /* calculate.swift in Sources */,
 				4DBCAC252408EEE7000715B1 /* ViewController.swift in Sources */,
+				4DD92EE6240BCC210062FF46 /* Stack.swift in Sources */,
 				4DBCAC3D24092567000715B1 /* calculator.swift in Sources */,
 				4DBCAC212408EEE7000715B1 /* AppDelegate.swift in Sources */,
 				4DBCAC232408EEE7000715B1 /* SceneDelegate.swift in Sources */,

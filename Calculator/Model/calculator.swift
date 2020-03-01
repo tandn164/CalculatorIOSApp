@@ -8,40 +8,55 @@
 
 import Foundation
 struct caculator{
-    var result : Float = 0
-    var dau = "+"
-    var prebutton = "+"
-    mutating func setResult(_ number2: Float)
-    {
-        switch dau {
-        case "+":
-            result = result + number2
-        case "-":
-            result = result - number2
-        case "x":
-            result = result * number2
-        case ":":
-            result = result / number2
-        default:
-            break
+    var bieuthuc: [String] = []
+    var predau : String = "+"
+    var prenum: String = "0"
+    func isOperator(_ x: String) -> Bool {
+        if x=="+" || x=="-" || x=="x" || x==":"
+        {
+            return true
         }
+        return false
     }
-    mutating func setPrebutton(_ button: String)
-    {
-        self.prebutton = button
+    func getPrioity(_ x: String) -> Int {
+        if x == "x" || x == ":"
+        {
+            return 2
+        }
+        return 1
     }
-    mutating func setDau(_ dau: String){
-        self.dau = dau
-        
+    func isOperand(_ x: String) -> Bool {
+        if x != "+" && x != "-" && x != "x" && x != ":"
+        {
+            return true
+        }
+        return false
     }
-    func getResult() -> Float {
+    mutating func addElement(_ element: String){
+        bieuthuc.append(element)
+    }
+    func getPrenum() -> String {
+        return prenum
+    }
+    func getPredau() -> String {
+        return predau
+    }
+    mutating func setPrenum(_ prenum: String) {
+        self.prenum = prenum
+    }
+    mutating func setPredau(_ predau: String) {
+        self.predau = predau
+    }
+    mutating func tinh() -> String{
+        var bieuthuc2: [String] = []
+        while bieuthuc.count > 0
+        {
+            bieuthuc2.insert(bieuthuc.last!, at: bieuthuc2.count)
+            bieuthuc.remove(at: bieuthuc.count-1)
+        }
+        var x = calculate(bieuthuc2)
+        let result = x.calculateResult()
+        bieuthuc.append(result)
         return result
-    }
-    func getDau() -> String {
-        return dau
-    }
-    func getPrebutton() -> String
-    {
-        return prebutton
     }
 }
